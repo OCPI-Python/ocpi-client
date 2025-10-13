@@ -19,90 +19,15 @@ from app.database.models import Connector, DbOcpiCdr, DbOcpiSession, Pile, Stati
 async def party_fixture():
     return OcpiParty(
         country_code='TW',
-        party_id='EVO',
+        party_id=...,
         party_roles=[OcpiPartyRoleEnum.EMSP, OcpiPartyRoleEnum.CPO],
-        versions_url='https://cp.testing.evoasis.com.tw/ocpi/versions',
-        credentials_token_for_receiving_request_from_party='01K3G1GDN0PXGN11XG60FVD249',
+        versions_url=...,
+        credentials_token_for_receiving_request_from_party=...,
 
-        credentials_token_for_sending_register_to_party='d7c7b4a5-b761-4523-ab9a-b0d9bd4e4b96',
-        credentials_token_for_sending_request_to_party='25b8fce6-dcbe-4e0e-b18b-c3dcdd83370g',
+        credentials_token_for_sending_register_to_party=...,
+        credentials_token_for_sending_request_to_party=...,
         
-        # versions_url='https://ocpi.evoasis.com.tw/versions',
-        # credentials_token_for_sending_register_to_party='d157b5bc-13e9-482b-8f9c-b98ba03b4594',
-        # credentials_token_for_sending_request_to_party='56b78cd8-722d-4008-9b74-264bdfb6e8bb',
-
-        v221_endpoints=[
-            {
-                "identifier": "tariffs",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/tariffs"
-            },
-            {
-                "identifier": "sessions",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/sessions"
-            },
-            {
-                "identifier": "cdrs",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/cdrs"
-            },
-            {
-                "identifier": "locations",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/locations"
-            },
-            {
-                "identifier": "commands",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/commands"
-            },
-            {
-                "identifier": "tokens",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/tokens"
-            },
-            {
-                "identifier": "credentials",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/credentials"
-            },
-            {
-                "identifier": "sessions",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/sessions"
-            },
-            {
-                "identifier": "cdrs",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/cdrs"
-            },
-            {
-                "identifier": "locations",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/locations"
-            },
-            {
-                "identifier": "credentials",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/credentials"
-            },
-            {
-                "identifier": "tokens",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/tokens"
-            },
-            {
-                "identifier": "commands",
-                "role": "RECEIVER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/receiver/commands"
-            },
-            {
-                "identifier": "tariffs",
-                "role": "SENDER",
-                "url": "https://cp.testing.evoasis.com.tw/ocpi/2.2.1/sender/tariffs"
-            }
-        ]
+        v221_endpoints=[],
     )
 
 
@@ -170,16 +95,16 @@ async def new_cdr(random_connector: Connector):
     return DbOcpiCdr(
         # id=PydanticObjectId(),
         receiver_country_code='TW',
-        receiver_party_id='EVO',
+        receiver_party_id=...,
         
         country_code='TW',
-        party_id='WIN',
+        party_id=...,
         start_date_time=now,
         end_date_time=now + timedelta(hours=1),
         session_id=f'SID-TEST-{now.strftime('%Y%m%d%H%M%S')}',
         cdr_token=OcpiCdrToken(
             country_code='TW',
-            party_id='EVO',
+            party_id=...,
             uid='UID1',
             type=OcpiTokenTypeEnum.APP_USER,
             contract_id='DE-8AA-CA2B3C4D5-L', # https://evroaming.org/wp-content/uploads/2024/10/20211118-PSA-IDACS-whitepaper-ID-Format-and-syntax-v0.4-clean-version.pdf

@@ -67,7 +67,7 @@ class TestOcpiClient:
 #         ocpi_client.party.v221_endpoints = [OcpiEndpoint(
 #             identifier=OcpiModuleIdEnum.credentials,
 #             role=OcpiInterfaceRoleEnum.RECEIVER,
-#             url=HttpUrl('https://d07041cb066d40a89d5156545965aa4c.api.mockbin.io/')
+#             url=HttpUrl(...)
 #         )]
         
 #         response = await ocpi_client.post_credentials(
@@ -78,7 +78,7 @@ class TestOcpiClient:
 #                 roles=[],
 #             )
 #         )
-#         assert response == '01JM2S75MMNRXX4M5FPGA9P1AP'
+#         assert response == ...
         
 
 
@@ -132,14 +132,14 @@ class TestOcpiClient:
         assert evse.physical_reference == TestOcpiClient.evse.physical_reference
         assert evse.directions == TestOcpiClient.evse.directions
         assert evse.capabilities == TestOcpiClient.evse.capabilities
-        # assert evse.floor_level == TestOcpiClient.pile.floor_level # EVO 會回傳 TEST，原因待查。
+        # assert evse.floor_level == TestOcpiClient.pile.floor_level
         assert evse.parking_restrictions == TestOcpiClient.evse.parking_restrictions
-        # assert evse.last_updated == TestOcpiClient.pile.heartbeat_timestamp # EVO 會差幾秒，先不深究。
+        # assert evse.last_updated == TestOcpiClient.pile.heartbeat_timestamp
 
         ocpi_evse_with_connector = await TestOcpiClient.connector.to_ocpi_evse_with_connector()
         
         assert evse.evse_id == ocpi_evse_with_connector.evse_id
-        # assert evse.status == ocpi_evse_with_connector.status # EVO 會變成 INOPERATIVE，原因待查。
+        # assert evse.status == ocpi_evse_with_connector.status
         assert evse.status_schedule == ocpi_evse_with_connector.status_schedule
 
         assert evse.connectors[0].id == ocpi_evse_with_connector.connectors[0].id
@@ -147,11 +147,11 @@ class TestOcpiClient:
         assert evse.connectors[0].format == ocpi_evse_with_connector.connectors[0].format
         assert evse.connectors[0].tariff_ids == TestOcpiClient.evse.ocpi_tariff_ids
         assert evse.connectors[0].max_voltage == TestOcpiClient.connector.max_voltage
-        # assert evse.connectors[0].power_type == TestOcpiClient.connector.power_type # EVO 會變成 AC_2_PHASE，原因待查。
+        # assert evse.connectors[0].power_type == TestOcpiClient.connector.power_type
         assert evse.connectors[0].max_amperage == TestOcpiClient.connector.max_amperage
         assert evse.connectors[0].max_electric_power == TestOcpiClient.connector.max_electric_power
-        # assert evse.connectors[0].terms_and_conditions == ocpi_evse_with_connector.connectors[0].terms_and_conditions # EVO 會變成 https://wincharge.com.tw/about-us/，原因待查。
-        # assert evse.connectors[0].last_updated == ocpi_evse_with_connector.connectors[0].last_updated # EVO 會差幾秒，先不深究。
+        # assert evse.connectors[0].terms_and_conditions == ocpi_evse_with_connector.connectors[0].terms_and_conditions
+        # assert evse.connectors[0].last_updated == ocpi_evse_with_connector.connectors[0].last_updated
 
 
     @pytest.mark.asyncio
@@ -191,7 +191,7 @@ class TestOcpiClient:
             party_id=_SETTINGS.OCPI_PARTY_ID,
             id=f'TEST{now.strftime("%Y%m%d%H%M%S")}', # TEST20241012234343
             currency='TWD',
-            type=OcpiTariffTypeEnum.PROFILE_FAST, # TW-EVO 看來沒實作這個，不管 put 什麼，get 回來都無值。
+            type=OcpiTariffTypeEnum.PROFILE_FAST,
             elements=[OcpiTariffElement(price_components=[OcpiPriceComponent(
                 type=OcpiTariffDimensionTypeEnum.ENERGY,
                 price=Decimal('10'),
@@ -218,7 +218,7 @@ class TestOcpiClient:
     @pytest.mark.asyncio
     async def test_put_session(self, ocpi_client: OcpiClient, new_session: DbOcpiSession):
         '''
-        此測試於 put 階段會成功，get 階段會失敗，因為 session 並沒有真的來自 TW-EVO MSP 啟動之交易，他們收到 session 表示成功應該只是格式上沒問題，實際上沒有真的存下來。
+        此測試於 put 階段會成功，get 階段會失敗，因為 session 並沒有真的來自交易，他們收到 session 表示成功應該只是格式上沒問題，實際上沒有真的存下來。
         '''
         TestOcpiClient.session = new_session
         await TestOcpiClient.session.insert()
@@ -232,7 +232,7 @@ class TestOcpiClient:
         assert get_response.id == str(TestOcpiClient.session.id)
 
 
-    @pytest.mark.xfail(reason='TW-EVO MSP does not keep sessions with no command from them')
+    @pytest.mark.xfail(reason='MSP does not keep sessions with no command from them')
     @pytest.mark.asyncio
     async def test_patch_session(self, ocpi_client: OcpiClient):
         '''
