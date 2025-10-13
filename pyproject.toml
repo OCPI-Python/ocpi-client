@@ -1,10 +1,10 @@
 [project]
 # Basic information
 name = "ocpi-client"
-version = "0.1.0"
+version = "0.1.1"
 
 # Dependencies and requirements
-dependencies = ["httpx>=0.28.1", "ocpi-pydantic>=0.8.0"]
+dependencies = ["httpx>=0.28.1", "ocpi-pydantic>=0.9.0"]
 requires-python = ">=3.10"
 
 # About your project
@@ -66,8 +66,8 @@ log_level = "DEBUG"
 dev = [
     "ipykernel>=6.29.5",
     "pytest-cov>=7.0",
-    "ipython>=8.18",
+    "ipython>=8.37",
     "loguru>=0.7.3",
-    "mimesis>=12",
+    "mimesis>=18",
     "pytest-asyncio>=1.1.0",
 ]
