@@ -5,7 +5,7 @@ version = "0.1.0"
 
 # Dependencies and requirements
 dependencies = ["httpx>=0.28.1", "ocpi-pydantic>=0.8.0"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 # About your project
 authors = [{ name = "Leon" }]
@@ -19,7 +19,6 @@ classifiers = [
     "Environment :: Web Environment",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
