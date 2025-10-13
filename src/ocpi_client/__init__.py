@@ -34,10 +34,9 @@ class OcpiClient:
         self.from_party_id = from_party_id.upper()
         self.party = to_party
         self.logger = logger
-        self.client.event_hooks = {'request': [OcpiClient._log_request], 'response': [OcpiClient._log_response]}
+        self.client.event_hooks = {'request': [self._log_request], 'response': [self._log_response]}
 
 
-    @staticmethod
     async def _log_request(self, request: httpx.Request):
         self.logger.info({
             'request_method': request.method,
@@ -47,7 +46,6 @@ class OcpiClient:
         })
 
 
-    @staticmethod
     async def _log_response(self, response: httpx.Response):
         message = {
             'response_url': response.url,
