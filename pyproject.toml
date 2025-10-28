@@ -64,7 +64,7 @@ log_level = "DEBUG"
 
 [dependency-groups]
 dev = [
-    "ipykernel>=6.29.5",
+    "ipykernel>=7.1",
     "pytest-cov>=7.0",
     "ipython>=8.37",
     "loguru>=0.7.3",
