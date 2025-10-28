@@ -370,8 +370,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tokens and item.role == OcpiInterfaceRoleEnum.SENDER)
-        url = f'{endpoint.url}/{token.uid}/authorize'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{token.uid}/authorize'
         response = await self.client.post(
             url,
             params={'type': token.type.value}, # https://ocpi.server.com/2.2/tokens/012345678/authorize?type=RFID
@@ -414,8 +413,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{session.id}'
         response = await self.client.put(
             url,
             json=session.model_dump(mode='json'),
@@ -441,8 +439,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{session.id}'
         response = await self.client.patch(
             url,
             json=session.model_dump(mode='json'),
@@ -471,8 +468,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session_id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{session_id}'
         response = await self.client.get(
             url,
             headers={
@@ -551,8 +547,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff.id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{tariff.id}'
         response = await self.client.put(
             url,
             json=tariff.model_dump(mode='json'),
@@ -576,8 +571,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
         response = await self.client.get(
             url,
             headers={
@@ -605,8 +599,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
         response = await self.client.delete(
             url,
             headers={
