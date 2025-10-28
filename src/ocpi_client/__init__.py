@@ -192,8 +192,7 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{location_id}'
         response = await self.client.get(
             url,
             headers={
@@ -223,8 +222,7 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}'
         response = await self.client.get(
             url,
             headers={
@@ -254,8 +252,7 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}/{connector_id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}/{connector_id}'
         response = await self.client.get(
             url,
             headers={
@@ -280,8 +277,7 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location.id}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{location.id}'
         response = await self.client.put(
             url,
             json=location.model_dump(mode='json'),
@@ -306,8 +302,7 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
-        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{ocpi_location_id}/{ocpi_evse.uid}'
-        url = url.replace('//', '/')
+        url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{ocpi_location_id}/{ocpi_evse.uid}'
         response = await self.client.put(
             url,
             json=ocpi_evse.model_dump(mode='json'),
