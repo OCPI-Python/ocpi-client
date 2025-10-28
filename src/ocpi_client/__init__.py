@@ -192,8 +192,10 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}'
+        url = url.replace('//', '/')
         response = await self.client.get(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
@@ -221,8 +223,10 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}'
+        url = url.replace('//', '/')
         response = await self.client.get(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
@@ -250,8 +254,10 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}/{connector_id}'
+        url = url.replace('//', '/')
         response = await self.client.get(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location_id}/{evse_uid}/{connector_id}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
@@ -274,8 +280,10 @@ class OcpiClient:
             self.logger.warning({'title': 'No endpoints in this party', 'instance': {'party_id': self.party.party_id, '2.2.1 endpoints': self.party.v221_endpoints}})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location.id}'
+        url = url.replace('//', '/')
         response = await self.client.put(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{location.id}',
+            url,
             json=location.model_dump(mode='json'),
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
@@ -298,8 +306,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{ocpi_location_id}/{ocpi_evse.uid}'
+        url = url.replace('//', '/')
         response = await self.client.put(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{ocpi_location_id}/{ocpi_evse.uid}',
+            url,
             json=ocpi_evse.model_dump(mode='json'),
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
@@ -360,8 +370,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tokens and item.role == OcpiInterfaceRoleEnum.SENDER)
+        url = f'{endpoint.url}/{token.uid}/authorize'
+        url = url.replace('//', '/')
         response = await self.client.post(
-            f'{endpoint.url}/{token.uid}/authorize',
+            url,
             params={'type': token.type.value}, # https://ocpi.server.com/2.2/tokens/012345678/authorize?type=RFID
             json=location_reference.model_dump(mode='json'),
             headers={
@@ -402,8 +414,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}'
+        url = url.replace('//', '/')
         response = await self.client.put(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}',
+            url,
             json=session.model_dump(mode='json'),
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
@@ -427,8 +441,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}'
+        url = url.replace('//', '/')
         response = await self.client.patch(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session.id}',
+            url,
             json=session.model_dump(mode='json'),
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
@@ -455,8 +471,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.sessions and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session_id}'
+        url = url.replace('//', '/')
         response = await self.client.get(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{session_id}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
@@ -533,8 +551,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff.id}'
+        url = url.replace('//', '/')
         response = await self.client.put(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff.id}',
+            url,
             json=tariff.model_dump(mode='json'),
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
@@ -556,8 +576,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
+        url = url.replace('//', '/')
         response = await self.client.get(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
@@ -583,8 +605,10 @@ class OcpiClient:
             self.logger.error({'title': 'No endpoints in this party', 'instance': self.party})
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.tariffs and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        url = f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}'
+        url = url.replace('//', '/')
         response = await self.client.delete(
-            f'{endpoint.url}/{self.from_country_code}/{self.from_party_id}/{tariff_id}',
+            url,
             headers={
                 'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,

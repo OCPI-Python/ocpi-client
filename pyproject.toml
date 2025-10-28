@@ -1,7 +1,7 @@
 [project]
 # Basic information
 name = "ocpi-client"
-version = "0.1.4"
+version = "0.1.5"
 
 # Dependencies and requirements
 dependencies = ["httpx>=0.28.1", "ocpi-pydantic>=0.9.0"]
