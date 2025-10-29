@@ -389,7 +389,7 @@ class OcpiClient:
         Receive the asynchronous response from the Charge Point.
         '''
         self.logger.info({'title': 'Response to command', 'instance': {'result': result}})
-        response = await self.client.post(response_url, json=result, headers={
+        response = await self.client.post(response_url, json=result.model_dump(mode='json'), headers={
             'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
             'OCPI-from-country-code': self.from_country_code,
             'OCPI-from-party-id': self.from_party_id,
