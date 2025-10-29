@@ -10,13 +10,13 @@ import pytest_asyncio
 async def party_fixture():
     return OcpiParty(
         country_code='TW',
-        party_id=...,
+        party_id='EVO',
         party_roles=[OcpiPartyRoleEnum.EMSP, OcpiPartyRoleEnum.CPO],
-        versions_url=...,
-        credentials_token_for_receiving_request_from_party=...,
+        versions_url='http://fsfs.micl.com',
+        credentials_token_for_receiving_request_from_party='aaa',
 
-        credentials_token_for_sending_register_to_party=...,
-        credentials_token_for_sending_request_to_party=...,
+        credentials_token_for_sending_register_to_party='bbb',
+        credentials_token_for_sending_request_to_party='ccc',
         
         v221_endpoints=[],
     )

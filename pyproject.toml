@@ -1,7 +1,7 @@
 [project]
 # Basic information
 name = "ocpi-client"
-version = "0.1.8"
+version = "0.1.9"
 
 # Dependencies and requirements
 dependencies = ["httpx>=0.28.1", "ocpi-pydantic>=0.9.0"]
@@ -48,18 +48,21 @@ distribution = true
 
 
 [tool.pytest.ini_options]
+log_level = "DEBUG"
+asyncio_default_fixture_loop_scope = "function"
 addopts = """
 --exitfirst
 --pdb
 --pdbcls=IPython.terminal.debugger:TerminalPdb
+-v
+-r a
+--capture=tee-sys
 --cov
 --cov-report=term
 --cov-report=html
 --cov-report=xml
 --no-cov-on-fail
 """
-asyncio_default_fixture_loop_scope = "function"
-log_level = "DEBUG"
 
 
 [dependency-groups]
@@ -67,7 +70,7 @@ dev = [
     "ipykernel>=7.1",
     "pytest-cov>=7.0",
     "ipython>=8.37",
-    "loguru>=0.7.3",
     "mimesis>=18",
     "pytest-asyncio>=1.1.0",
+    "pytest-loguru>=0.4.0",
 ]

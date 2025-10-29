@@ -1,2 +1,5 @@
 .pdm-python
 dist/
+__pycache__
+.coverage
+coverage.xml

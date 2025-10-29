@@ -398,6 +398,7 @@ class OcpiClient:
             'X-Request-ID': str(uuid4()),
             'X-Correlation-ID': str(uuid4()),
         })
+        return response
 
 
     async def put_session(self, session: OcpiSession):

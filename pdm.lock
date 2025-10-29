@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:c97a3e91cce38bcdd32a22dfa55c6fb0bb2c5c528ddea031c2464462ccc4d3b3"
+content_hash = "sha256:bae8d19020db0142e50d3b77de05fb6597551f87520baf0da9d8ef309fc7aa25"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -983,6 +983,20 @@ dependencies = [
 files = [
     {file = "pytest_cov-7.0.0-py3-none-any.whl", hash = "sha256:3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"},
     {file = "pytest_cov-7.0.0.tar.gz", hash = "sha256:33c97eda2e049a0c5298e91f519302a1334c26ac65c1a483d6206fd458361af1"},
+]
+
+[[package]]
+name = "pytest-loguru"
+version = "0.4.0"
+requires_python = ">=3.8"
+summary = "Pytest Loguru"
+groups = ["dev"]
+dependencies = [
+    "loguru",
+]
+files = [
+    {file = "pytest_loguru-0.4.0-py3-none-any.whl", hash = "sha256:3cc7b9c6b22cb158209ccbabf0d678dacd3f3c7497d6f46f1c338c13bee1ac77"},
+    {file = "pytest_loguru-0.4.0.tar.gz", hash = "sha256:0d9e4e72ae9bfd92f774c666e7353766af11b0b78edd59c290e89be116050f03"},
 ]
 
 [[package]]
