@@ -73,4 +73,5 @@ dev = [
     "mimesis>=18",
     "pytest-asyncio>=1.1.0",
     "pytest-loguru>=0.4.0",
+    "pytest-httpx>=0.35.0",
 ]
