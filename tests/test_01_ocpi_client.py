@@ -66,6 +66,13 @@ class TestOcpiClient:
     cdr: OcpiCdr
 
 
+    # @pytest.mark.asyncio
+    # async def test_get_versions(self, ocpi_client: OcpiClient):
+    #     versions = await ocpi_client.get_versions()
+    #     assert versions
+    #     assert not ocpi_client.client.is_closed
+
+
     @pytest.mark.asyncio
     async def test_post_command_result(self, ocpi_client: OcpiClient):
         response = await ocpi_client.post_command_result(
@@ -75,14 +82,6 @@ class TestOcpiClient:
         assert response
         assert response.status_code == HTTPStatus.OK
         ocpi_client.logger.debug(response)
-
-
-
-    # @pytest.mark.asyncio
-    # async def test_get_versions(self, ocpi_client: OcpiClient):
-    #     versions = await ocpi_client.get_versions()
-    #     assert versions
-    #     assert not ocpi_client.client.is_closed
 
 
     # @pytest.mark.asyncio
