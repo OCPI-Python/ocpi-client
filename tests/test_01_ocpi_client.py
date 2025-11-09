@@ -16,6 +16,8 @@ from ocpi_pydantic.v221.enum import OcpiConnectorTypeEnum, OcpiVersionNumberEnum
 from ocpi_pydantic.v221.sessions import OcpiSession
 from ocpi_pydantic.v221.tariffs import OcpiTariff, OcpiTariffElement, OcpiPriceComponent
 from ocpi_pydantic.v221.tokens import OcpiToken, OcpiLocationReferences, OcpiAuthorizationInfo, OcpiTokenListResponse
+from ocpi_pydantic.v221.versions import OcpiVersion, OcpiVersionsResponse
+from pytest_httpx import HTTPXMock
 from ocpi_client import OcpiClient
 from ocpi_client.models import OcpiParty
 import pytest
@@ -66,11 +68,16 @@ class TestOcpiClient:
     cdr: OcpiCdr
 
 
-    # @pytest.mark.asyncio
-    # async def test_get_versions(self, ocpi_client: OcpiClient):
-    #     versions = await ocpi_client.get_versions()
-    #     assert versions
-    #     assert not ocpi_client.client.is_closed
+    @pytest.mark.asyncio
+    async def test_get_versions(self, ocpi_client: OcpiClient, httpx_mock: HTTPXMock):
+        response_model = OcpiVersionsResponse(
+            data=[OcpiVersion(version=OcpiVersionNumberEnum.v221, url='https://api.evo.net/ocpi/v221')],
+            status_code=OcpiStatusCodeEnum.SUCCESS,
+        )
+        httpx_mock.add_response(json=response_model.model_dump(mode='json'))
+        versions = await ocpi_client.get_versions()
+        assert versions
+        assert not ocpi_client.client.is_closed
 
 
     @pytest.mark.asyncio

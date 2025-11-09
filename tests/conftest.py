@@ -13,7 +13,7 @@ async def party_fixture():
         country_code='TW',
         party_id='EVO',
         party_roles=[OcpiPartyRoleEnum.EMSP, OcpiPartyRoleEnum.CPO],
-        versions_url='http://api.evo.net/ocpi/versions',
+        versions_url='https://api.evo.net/ocpi/versions',
         credentials_token_for_receiving_request_from_party='aaa',
 
         credentials_token_for_sending_register_to_party='bbb',
