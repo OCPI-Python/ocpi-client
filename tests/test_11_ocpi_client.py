@@ -1,60 +1,18 @@
 from datetime import UTC, datetime
 from decimal import Decimal
 from http import HTTPStatus
-from logging import Logger
-import logging
-from sys import stderr, stdout
 
-import httpx
-import loguru
 from ocpi_pydantic.v221.cdrs import OcpiCdr
 from ocpi_pydantic.v221.commands import OcpiCommandResult, OcpiCommandResultTypeEnum
 from ocpi_pydantic.v221.locations.connector import OcpiConnector
 from ocpi_pydantic.v221.locations.location import OcpiHours, OcpiLocation, OcpiGeoLocation
 from ocpi_pydantic.v221.locations.evse import OcpiEvse
-from ocpi_pydantic.v221.enum import OcpiConnectorTypeEnum, OcpiVersionNumberEnum, OcpiPowerTypeEnum, OcpiTariffTypeEnum, OcpiTariffDimensionTypeEnum, OcpiStatusEnum, OcpiStatusCodeEnum, OcpiSessionStatusEnum
 from ocpi_pydantic.v221.sessions import OcpiSession
 from ocpi_pydantic.v221.tariffs import OcpiTariff, OcpiTariffElement, OcpiPriceComponent
 from ocpi_pydantic.v221.tokens import OcpiToken, OcpiLocationReferences, OcpiAuthorizationInfo, OcpiTokenListResponse
-from ocpi_pydantic.v221.versions import OcpiVersion, OcpiVersionsResponse
 from pytest_httpx import HTTPXMock
 from ocpi_client import OcpiClient
-from ocpi_client.models import OcpiParty
 import pytest
-import pytest_asyncio
-
-
-
-_FROM_COUNTRY_CODE = 'TW'
-_FROM_PARTY_ID = 'WNC'
-
-
-
-@pytest_asyncio.fixture
-async def logger_fixture():
-    _format = ''.join([
-        '<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | ',
-        '<level>{level: <8}</level> | ',
-        '<magenta>{process.name}</magenta>:<yellow>{thread.name}</yellow> | ',
-        '<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>'
-    ])
-    logger = loguru.logger
-    logger.remove() # Remove pre-configured STDERR hanlder
-    logger.add(stdout, level=logging.DEBUG, format=_format)
-    logger.add(stderr, level=logging.WARNING, format=_format)
-    return logger
-
-
-
-@pytest_asyncio.fixture
-async def ocpi_client(party_fixture: OcpiParty, logger_fixture: Logger):
-    return OcpiClient(
-        httpx_async_client=httpx.AsyncClient(),
-        from_country_code=_FROM_COUNTRY_CODE,
-        from_party_id=_FROM_PARTY_ID,
-        to_party=party_fixture,
-        logger=logger_fixture,
-    )
 
 
 
@@ -66,18 +24,6 @@ class TestOcpiClient:
     tariff: OcpiTariff
     session: OcpiSession
     cdr: OcpiCdr
-
-
-    @pytest.mark.asyncio
-    async def test_get_versions(self, ocpi_client: OcpiClient, httpx_mock: HTTPXMock):
-        response_model = OcpiVersionsResponse(
-            data=[OcpiVersion(version=OcpiVersionNumberEnum.v221, url='https://api.evo.net/ocpi/v221')],
-            status_code=OcpiStatusCodeEnum.SUCCESS,
-        )
-        httpx_mock.add_response(json=response_model.model_dump(mode='json'))
-        versions = await ocpi_client.get_versions()
-        assert versions
-        assert not ocpi_client.client.is_closed
 
 
     @pytest.mark.asyncio
