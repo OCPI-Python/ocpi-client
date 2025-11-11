@@ -135,7 +135,7 @@ class OcpiClient:
         response = await self.client.post(
             str(credentials_endpoint.url),
             headers={
-                'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_register_to_party).encode()).decode()}',
+                'Authorization': f'Token {b64encode(self.party.credentials_token_for_sending_request_to_party.encode()).decode()}',
                 'OCPI-from-country-code': self.from_country_code,
                 'OCPI-from-party-id': self.from_party_id,
                 'OCPI-to-country-code': self.party.country_code,
