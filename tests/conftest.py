@@ -3,7 +3,7 @@ from sys import stderr, stdout
 
 import httpx
 import loguru
-from ocpi_pydantic.v221.enum import OcpiAuthMethodEnum, OcpiReservationRestrictionTypeEnum, OcpiConnectorTypeEnum, OcpiTokenTypeEnum, OcpiWhitelistTypeEnum, OcpiConnectorFormatEnum, OcpiPowerTypeEnum, OcpiCdrDimensionTypeEnum, OcpiSessionStatusEnum, OcpiTariffDimensionTypeEnum, OcpiTariffTypeEnum, OcpiDayOfWeekEnum, OcpiStatusCodeEnum, OcpiPartyRoleEnum
+from ocpi_pydantic.v221.enum import OcpiModuleIdEnum, OcpiInterfaceRoleEnum, OcpiConnectorTypeEnum, OcpiTokenTypeEnum, OcpiWhitelistTypeEnum, OcpiConnectorFormatEnum, OcpiPowerTypeEnum, OcpiCdrDimensionTypeEnum, OcpiSessionStatusEnum, OcpiTariffDimensionTypeEnum, OcpiTariffTypeEnum, OcpiDayOfWeekEnum, OcpiStatusCodeEnum, OcpiPartyRoleEnum
 from ocpi_pydantic.v221.versions import OcpiEndpoint
 from ocpi_client.models import OcpiParty
 import pytest_asyncio
@@ -29,7 +29,10 @@ async def party_fixture():
         credentials_token_for_sending_register_to_party='bbb',
         credentials_token_for_sending_request_to_party='ccc',
         
-        v221_endpoints=[],
+        v221_endpoints=[
+            OcpiEndpoint(identifier=OcpiModuleIdEnum.credentials, role=OcpiInterfaceRoleEnum.RECEIVER, url='https://api.evo.net/ocpi/v221/credentials'),
+            OcpiEndpoint(identifier=OcpiModuleIdEnum.credentials, role=OcpiInterfaceRoleEnum.SENDER, url='https://api.evo.net/ocpi/v221/credentials'),
+        ],
     )
 
 

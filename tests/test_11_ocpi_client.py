@@ -38,13 +38,6 @@ class TestOcpiClient:
 
 
     # @pytest.mark.asyncio
-    # async def test_get_version_details(self, ocpi_client: OcpiClient):
-    #     endpoints = await ocpi_client.get_version_details(version=OcpiVersionNumberEnum.v221)
-    #     # logger.debug(endpoints)
-    #     assert endpoints
-
-
-    # @pytest.mark.asyncio
     # async def test_put_location(self, ocpi_client: OcpiClient, location: OcpiLocation) -> None:
     #     location.coordinates.latitude = '24.878'
     #     location.coordinates.longitude = '121.211'
