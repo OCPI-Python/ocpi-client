@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:eb88d47379c3e26a04cad69414ba41489ef148191b24253914ff3a6b9b8d75b0"
+content_hash = "sha256:d6b4c2d84734a3f739aee151fb01a451678b0dd78134f72b8577328fad7e787d"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -667,7 +667,7 @@ files = [
 
 [[package]]
 name = "ocpi-pydantic"
-version = "0.9.0"
+version = "0.9.1"
 requires_python = ">=3.10"
 summary = "OCPI Pydantic models"
 groups = ["default"]
@@ -675,8 +675,8 @@ dependencies = [
     "pydantic<3,>=2.12",
 ]
 files = [
-    {file = "ocpi_pydantic-0.9.0-py3-none-any.whl", hash = "sha256:c3eba7f51e4b5661726acecde425f2df88192209f262bd745f1596b79b54e593"},
-    {file = "ocpi_pydantic-0.9.0.tar.gz", hash = "sha256:0564e8b3d425effb81391add980e5fa0af2bf735bc93f4da401e37e6e00f1fd8"},
+    {file = "ocpi_pydantic-0.9.1-py3-none-any.whl", hash = "sha256:42739f8d00c82bd5d6d5c695bd5640203aa76b464ba1e3de220e78fd06bccd6b"},
+    {file = "ocpi_pydantic-0.9.1.tar.gz", hash = "sha256:d8cacf4bdfd4398f8d0eeeebe3a51c67bd16b66534fa79adfdfa158e9e9418d5"},
 ]
 
 [[package]]
@@ -955,18 +955,18 @@ files = [
 
 [[package]]
 name = "pytest-asyncio"
-version = "1.2.0"
-requires_python = ">=3.9"
+version = "1.3.0"
+requires_python = ">=3.10"
 summary = "Pytest support for asyncio"
 groups = ["dev"]
 dependencies = [
     "backports-asyncio-runner<2,>=1.1; python_version < \"3.11\"",
-    "pytest<9,>=8.2",
+    "pytest<10,>=8.2",
     "typing-extensions>=4.12; python_version < \"3.13\"",
 ]
 files = [
-    {file = "pytest_asyncio-1.2.0-py3-none-any.whl", hash = "sha256:8e17ae5e46d8e7efe51ab6494dd2010f4ca8dae51652aa3c8d55acf50bfb2e99"},
-    {file = "pytest_asyncio-1.2.0.tar.gz", hash = "sha256:c609a64a2a8768462d0c99811ddb8bd2583c33fd33cf7f21af1c142e824ffb57"},
+    {file = "pytest_asyncio-1.3.0-py3-none-any.whl", hash = "sha256:611e26147c7f77640e6d0a92a38ed17c3e9848063698d5c93d5aa7aa11cebff5"},
+    {file = "pytest_asyncio-1.3.0.tar.gz", hash = "sha256:d7f52f36d231b80ee124cd216ffb19369aa168fc10095013c6b014a34d3ee9e5"},
 ]
 
 [[package]]
