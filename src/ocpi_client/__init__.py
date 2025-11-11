@@ -132,7 +132,7 @@ class OcpiClient:
         except StopIteration as stop_iteration:
             self.logger.error({'title': 'Remote party does not have credentials endpoint', 'instance': {'remote_party_endpoints': self.party.v221_endpoints}})
             raise ValueError('Remote party does not have credentials endpoint') from stop_iteration
-        response = await self.client.post(
+        response = await self.client.get(
             str(credentials_endpoint.url),
             headers={
                 'Authorization': f'Token {b64encode(self.party.credentials_token_for_sending_request_to_party.encode()).decode()}',
