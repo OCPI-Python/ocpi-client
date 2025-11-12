@@ -667,7 +667,7 @@ files = [
 
 [[package]]
 name = "ocpi-pydantic"
-version = "0.9.1"
+version = "0.9.2"
 requires_python = ">=3.10"
 summary = "OCPI Pydantic models"
 groups = ["default"]
@@ -675,8 +675,8 @@ dependencies = [
     "pydantic<3,>=2.12",
 ]
 files = [
-    {file = "ocpi_pydantic-0.9.1-py3-none-any.whl", hash = "sha256:42739f8d00c82bd5d6d5c695bd5640203aa76b464ba1e3de220e78fd06bccd6b"},
-    {file = "ocpi_pydantic-0.9.1.tar.gz", hash = "sha256:d8cacf4bdfd4398f8d0eeeebe3a51c67bd16b66534fa79adfdfa158e9e9418d5"},
+    {file = "ocpi_pydantic-0.9.2-py3-none-any.whl", hash = "sha256:5bf459cd158d7ade2b901aab7b7493f3add7d54f1c7fa4a58185b5c899f4b00e"},
+    {file = "ocpi_pydantic-0.9.2.tar.gz", hash = "sha256:70065b8aa994f3702e5763a79f23b8f880b3fa56f35890364e6df1367c6bceaf"},
 ]
 
 [[package]]
