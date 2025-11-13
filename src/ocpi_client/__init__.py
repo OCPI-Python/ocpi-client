@@ -205,6 +205,32 @@ class OcpiClient:
         except ValidationError as e: raise e
 
 
+    async def delete_credentials(self, version: OcpiVersionNumberEnum):
+        if version != OcpiVersionNumberEnum.v221: raise ValueError('Only OCPI version 2.2.1 is supported')
+        if not self.party.v221_endpoints: raise ValueError('Party OCPI V2.2.1 endpoints not available')
+        try:
+            credentials_endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.credentials and item.role == OcpiInterfaceRoleEnum.RECEIVER)
+        except StopIteration as stop_iteration:
+            self.logger.error({'title': 'Remote party does not have credentials endpoint', 'instance': {'remote_party_endpoints': self.party.v221_endpoints}})
+            raise ValueError('Remote party does not have credentials endpoint') from stop_iteration
+        response = await self.client.delete(
+            str(credentials_endpoint.url),
+            headers={
+                'Authorization': f'Token {b64encode(str(self.party.credentials_token_for_sending_request_to_party).encode()).decode()}',
+                'OCPI-from-country-code': self.from_country_code,
+                'OCPI-from-party-id': self.from_party_id,
+                'OCPI-to-country-code': self.party.country_code,
+                'OCPI-to-party-id': self.party.party_id,
+                'X-Request-ID': str(uuid4()),
+                'X-Correlation-ID': str(uuid4()),
+            },
+        )
+        try:
+            party_credentials_response = OcpiBaseResponse.model_validate(response.json())
+            return party_credentials_response
+        except ValidationError as e: raise e
+
+
     async def get_location(self, location_id: str):
         '''
         Retrieve a Location as it is stored in the eMSP system.
