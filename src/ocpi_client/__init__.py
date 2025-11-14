@@ -355,7 +355,7 @@ class OcpiClient:
             return
         endpoint = next(item for item in self.party.v221_endpoints if item.identifier == OcpiModuleIdEnum.locations and item.role == OcpiInterfaceRoleEnum.RECEIVER)
         url = f'{endpoint.url.unicode_string().removesuffix('/')}/{self.from_country_code}/{self.from_party_id}/{ocpi_location_id}/{ocpi_evse.uid}'
-        response = await self.client.put(
+        return await self.client.put(
             url,
             json=ocpi_evse.model_dump(mode='json'),
             headers={
@@ -368,7 +368,6 @@ class OcpiClient:
                 'X-Correlation-ID': str(uuid4()),
             },
         )
-        return True
 
 
     async def get_tokens(self):

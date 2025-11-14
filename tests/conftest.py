@@ -32,6 +32,7 @@ async def party_fixture():
         v221_endpoints=[
             OcpiEndpoint(identifier=OcpiModuleIdEnum.credentials, role=OcpiInterfaceRoleEnum.RECEIVER, url='https://api.evo.net/ocpi/v221/credentials'),
             OcpiEndpoint(identifier=OcpiModuleIdEnum.credentials, role=OcpiInterfaceRoleEnum.SENDER, url='https://api.evo.net/ocpi/v221/credentials'),
+            OcpiEndpoint(identifier=OcpiModuleIdEnum.locations, role=OcpiInterfaceRoleEnum.RECEIVER, url='https://api.evo.net/ocpi/v221/locations'),
         ],
     )
 

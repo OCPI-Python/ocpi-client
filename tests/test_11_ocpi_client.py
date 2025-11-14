@@ -38,43 +38,6 @@ class TestOcpiClient:
 
 
     # @pytest.mark.asyncio
-    # async def test_put_location(self, ocpi_client: OcpiClient, location: OcpiLocation) -> None:
-    #     location.coordinates.latitude = '24.878'
-    #     location.coordinates.longitude = '121.211'
-    #     location.postal_code = '325'
-    #     location.city = '桃園市'
-    #     location.address = '龍潭區百年路 1 號'
-    #     location.opening_times = OcpiHours(twentyfourseven=True)
-    #     location.publish = True
-    #     TestOcpiClient.location = location
-
-    #     response = await ocpi_client.put_location(location=await TestOcpiClient.location)
-    #     assert response
-
-
-    # @pytest.mark.asyncio
-    # async def test_get_location(self, ocpi_client: OcpiClient):
-    #     location = await ocpi_client.get_location(location_id=TestOcpiClient.location.id)
-    #     assert location
-    #     assert location.id == TestOcpiClient.location.id
-
-
-    # @pytest.mark.asyncio
-    # async def test_put_evse(self, ocpi_client: OcpiClient, evse: OcpiEvse, connector: OcpiConnector):
-    #     evse.floor_level = '1F'
-    #     TestOcpiClient.evse = evse
-
-    #     connector.standard = OcpiConnectorTypeEnum.IEC_62196_T2_COMBO
-    #     connector.power_type = OcpiPowerTypeEnum.AC_2_PHASE
-    #     connector.max_voltage = 380
-    #     connector.max_amperage = 100
-    #     TestOcpiClient.connector = connector
-        
-    #     response = await ocpi_client.put_evse(ocpi_location_id=TestOcpiClient.location.id, ocpi_evse=await TestOcpiClient.evse)
-    #     assert response
-
-
-    # @pytest.mark.asyncio
     # async def test_get_tokens(self, ocpi_client: OcpiClient):
     #     TestOcpiClient.tokens = await ocpi_client.get_tokens()
     #     assert TestOcpiClient.tokens
